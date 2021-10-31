@@ -101,8 +101,8 @@
 
                         <Button Content="Select Model" Margin="10" Height="25" Command="{Binding SelectCommand}" />
 
-                        <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Content="Number of Floors:" />
-                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding NoOfFloor,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label  VerticalAlignment="Center" Content="Typical Floor Height:" />
+                        <TextBox  Margin="5" Text="{Binding TypicalHeight,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <Label VerticalAlignment="Center" Content="Location:" />
                         <ComboBox Margin="5" ItemsSource="{Binding Locations}" SelectedItem="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -114,12 +114,15 @@
                             </WrapPanel>
                         </GroupBox>
 
+                        <Label  VerticalAlignment="Center" Content="No of Floor:" />
+                        <TextBox  Margin="5" IsEnabled="False" Text="{Binding NoOfFloor,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
                         <Label  VerticalAlignment="Center" Content="Footprint:" />
                         <TextBox  Margin="5" IsEnabled="False" Text="{Binding Footprint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        
+
                         <Label VerticalAlignment="Center" Content="Total Area:" />
                         <TextBox Margin="5" IsEnabled="False" Text="{Binding TotalArea}"/>
-                       
+
                     </StackPanel>
                 </GroupBox>
 
@@ -185,10 +188,14 @@
                 <GroupBox Header="Output">
                     <StackPanel>
                         <TextBox Height="40" Margin="5,5,5,10" TextWrapping="Wrap" Text="{Binding Output, Mode=OneWay}"/>
-                        <Image Visibility="{Binding IsConWoodHyb, Converter={StaticResource boolToVis}, FallbackValue=Collapsed}" Height="100" Width="200" Source="pack://siteoforigin:,,,/Resources/cth.png"  />
-                        <Image Visibility="{Binding IsWood, Converter={StaticResource boolToVis}, FallbackValue=Collapsed}" Height="100" Width="200" Source="pack://siteoforigin:,,,/Resources/rc.png"  />
-                        <Image Visibility="{Binding IsSteConHyb, Converter={StaticResource boolToVis}, FallbackValue=Collapsed}" Height="100" Width="200" Source="pack://siteoforigin:,,,/Resources/sch.png"  />
-                        <Image Visibility="{Binding IsRc, Converter={StaticResource boolToVis}, FallbackValue=Collapsed}" Height="100" Width="200" Source="pack://siteoforigin:,,,/Resources/wo.png"  />
+                        <Image Visibility="{Binding IsConWoodHyb, Converter={StaticResource boolToVis}}" 
+                               Height="100" Width="200" Source="/LearnCarbon;component/Resources/cth.png"  />
+                        <Image Visibility="{Binding IsWood, Converter={StaticResource boolToVis}}"
+                               Height="100" Width="200" Source="/LearnCarbon;component/Resources/wo.png"  />
+                        <Image Visibility="{Binding IsSteConHyb, Converter={StaticResource boolToVis}}"
+                               Height="100" Width="200" Source="/LearnCarbon;component/Resources/sch.png"  />
+                        <Image Visibility="{Binding IsRc, Converter={StaticResource boolToVis}}"
+                               Height="100" Width="200" Source="/LearnCarbon;component/Resources/rc.png"  />
                     </StackPanel>
                 </GroupBox>
 

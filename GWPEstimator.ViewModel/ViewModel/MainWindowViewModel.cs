@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace GWPEstimator.ViewModel.ViewModel
 {
@@ -19,6 +20,8 @@ namespace GWPEstimator.ViewModel.ViewModel
     {
         RhinoDoc doc;
         GH_Document GrasshopperDocument;
+        double height;
+        List<ObjRef> selectedObjects;
 
         #region Properties
 
@@ -46,6 +49,18 @@ namespace GWPEstimator.ViewModel.ViewModel
             {
                 noOfFloor = value;
                 TotalArea = Math.Round(value * Footprint, 3);
+                OnPropertyChange();
+            }
+        }
+        private double typicalHeight = 10;
+
+        public double TypicalHeight
+        {
+            get { return typicalHeight; }
+            set
+            {
+                typicalHeight = value;
+                NoOfFloor = (int)Math.Ceiling(height / typicalHeight);
                 OnPropertyChange();
             }
         }
@@ -211,73 +226,22 @@ namespace GWPEstimator.ViewModel.ViewModel
             Location = Locations[0];
             CalculateCommand = new RelayCommand(Calculate, null);
             SelectCommand = new RelayCommand(SelectModelObj, null);
+            RhinoDoc.ReplaceRhinoObject += Doc_ReplaceRhinoObject;
         }
         #endregion
 
         #region Command Methods
         private void SelectModelObj()
         {
-            const ObjectType geometryFilter = ObjectType.Brep;
+            selectedObjects = new List<ObjRef>();
 
-            GetObject go = new GetObject();
-            go.SetCommandPrompt("Select building objects - Brep or meshes");
-            go.GeometryFilter = geometryFilter;
-            go.GroupSelect = true;
-            go.SubObjectSelect = false;
-            go.EnableClearObjectsOnEntry(false);
-            go.EnableUnselectObjectsOnExit(false);
-            go.DeselectAllBeforePostSelect = false;
+            selectedObjects = GetRhinoObjects();
 
-            bool bHavePreselectedObjects = false;
+            if (selectedObjects == null) return;
 
-            for (; ; )
-            {
-                GetResult res = go.GetMultiple(1, 0);
-
-                if (res == GetResult.Option)
-                {
-                    go.EnablePreSelect(false, true);
-                    continue;
-                }
-
-                else if (res != GetResult.Object)
-                    return;
-
-                if (go.ObjectsWerePreselected)
-                {
-                    bHavePreselectedObjects = true;
-                    go.EnablePreSelect(false, true);
-                    continue;
-                }
-                break;
-            }
-
-            if (bHavePreselectedObjects)
-            {
-                // Normally, pre-selected objects will remain selected, when a
-                // command finishes, and post-selected objects will be unselected.
-                // This this way of picking, it is possible to have a combination
-                // of pre-selected and post-selected. So, to make sure everything
-                // "looks the same", lets unselect everything before finishing
-                // the command.
-                for (int i = 0; i < go.ObjectCount; i++)
-                {
-                    RhinoObject rhinoObject = go.Object(i).Object();
-                    if (null != rhinoObject)
-                        rhinoObject.Select(false);
-                }
-                doc.Views.Redraw();
-            }
-
-            int objectCount = go.ObjectCount;
-
-
-            RhinoApp.WriteLine(string.Format("Selected object count = {0}", objectCount));
-
-            var selectedObjects = go.Objects();
-
+            List<BoundingBox> boxList = new List<BoundingBox>();
             Footprint = 0.0;
-            for (int i = 0; i < selectedObjects.Length; i++)
+            for (int i = 0; i < selectedObjects.Count; i++)
             {
                 var obj = selectedObjects[i];
 
@@ -285,26 +249,34 @@ namespace GWPEstimator.ViewModel.ViewModel
 
                 if (brep != null)
                 {
-                    var surfaces = brep.Faces;
-                    foreach (var surface in surfaces)
-                    {
-                        var pt = AreaMassProperties.Compute(surface).Centroid;
-                        surface.ClosestPoint(pt, out double u, out double v);
+                    boxList.Add(brep.GetBoundingBox(false));
 
-                        var vectorN = surface.NormalAt(u, v);
-                        if (vectorN.IsParallelTo(new Vector3d(0, 0, -1)) == 1)
-                        {
-                            Footprint += AreaMassProperties.Compute(surface).Area;
-                        }
-                    }
+                    Footprint += GetFloorArea(brep);
                 }
             }
+
+            SetHeight(boxList);
+            //var bb = boxList[0];
+            //for (int j = 1; j < boxList.Count; j++)
+            //{
+            //    bb = BoundingBox.Union(bb, boxList[j]);
+            //}
+            //height = bb.Max.Z - bb.Min.Z;
+            //NoOfFloor = (int)Math.Ceiling(height / TypicalHeight);
         }
         private void Calculate()
         {
             try
             {
-                var path = @"C:\Users\Default\Desktop\testGh.gh";
+                string path = string.Empty;
+
+                if (File.Exists(@"C:\Users\Default\Desktop\testGh.gh"))
+                    path = @"C:\Users\Default\Desktop\testGh.gh";
+                else if (File.Exists(@"C: \Users\Admin\Desktop\testGh.gh"))
+                    path = @"C:\Users\Admin\Desktop\testGh.gh";
+                else
+                    throw new Exception("File not found in C:\\Users\\Default\\Desktop\\testGh.gh");
+
                 var io = new GH_DocumentIO();
                 io.Open(path);
 
@@ -385,7 +357,7 @@ namespace GWPEstimator.ViewModel.ViewModel
                             panel.ExpireSolution(true);
                             panel.CollectData();
                             foreach (var data in panel.VolatileData.AllData(true))
-                                Output += " " + data.ToString();
+                                Output += data.ToString();
 
                             if (OptionA)
                             {
@@ -397,21 +369,21 @@ namespace GWPEstimator.ViewModel.ViewModel
                             }
                             else if (OptionB)
                             {
-                                if (Output == "Wood-Hybrid")
+                                if (string.Equals(Output, "Wood-Hybrid"))
                                 {
                                     IsConWoodHyb = true;
                                     IsWood = false;
                                     IsSteConHyb = false;
                                     IsRc = false;
                                 }
-                                else if (Output == "Wood")
+                                else if (string.Equals(Output, "Wood"))
                                 {
                                     IsConWoodHyb = false;
                                     IsWood = true;
                                     IsSteConHyb = false;
                                     IsRc = false;
                                 }
-                                else if (Output == "Steel-Concrete")
+                                else if (string.Equals(Output, "Steel-Concrete"))
                                 {
                                     IsConWoodHyb = false;
                                     IsWood = false;
@@ -435,11 +407,128 @@ namespace GWPEstimator.ViewModel.ViewModel
                 Output = e.Message;
             }
         }
+        #endregion
+
+        #region private methods
+        private List<ObjRef> GetRhinoObjects()
+        {
+            const ObjectType geometryFilter = ObjectType.Brep;
+            GetObject go = new GetObject();
+            go.SetCommandPrompt("Select building objects - Brep or meshes");
+            go.GeometryFilter = geometryFilter;
+            go.GroupSelect = true;
+            go.SubObjectSelect = false;
+            go.EnableClearObjectsOnEntry(false);
+            go.EnableUnselectObjectsOnExit(false);
+            go.DeselectAllBeforePostSelect = false;
+
+            bool bHavePreselectedObjects = false;
+
+            for (; ; )
+            {
+                GetResult res = go.GetMultiple(1, 0);
+
+                if (res == GetResult.Option)
+                {
+                    go.EnablePreSelect(false, true);
+                    continue;
+                }
+
+                else if (res != GetResult.Object)
+                    return null;
+
+                if (go.ObjectsWerePreselected)
+                {
+                    bHavePreselectedObjects = true;
+                    go.EnablePreSelect(false, true);
+                    continue;
+                }
+                break;
+            }
+
+            if (bHavePreselectedObjects)
+            {
+                // Normally, pre-selected objects will remain selected, when a
+                // command finishes, and post-selected objects will be unselected.
+                // This this way of picking, it is possible to have a combination
+                // of pre-selected and post-selected. So, to make sure everything
+                // "looks the same", lets unselect everything before finishing
+                // the command.
+                for (int i = 0; i < go.ObjectCount; i++)
+                {
+                    RhinoObject rhinoObject = go.Object(i).Object();
+                    if (null != rhinoObject)
+                        rhinoObject.Select(false);
+                }
+                doc.Views.Redraw();
+            }
+
+            int objectCount = go.ObjectCount;
+
+
+            RhinoApp.WriteLine(string.Format("Selected object count = {0}", objectCount));
+
+
+            var selectedObjects = go.Objects().ToList();
+            return selectedObjects;
+        }
+        private double GetFloorArea(Brep brep)
+        {
+            if (brep == null) return 0;
+            var faces = brep.Faces;
+            foreach (var face in faces)
+            {
+                var pt = AreaMassProperties.Compute(face).Centroid;
+                face.ClosestPoint(pt, out double u, out double v);
+
+                var vectorN = face.NormalAt(u, v);
+                if (vectorN.IsParallelTo(new Vector3d(0, 0, -1)) == 1)
+                {
+                    return AreaMassProperties.Compute(face).Area;
+                }
+            }
+            return 0;
+        }
+
+        private void SetHeight(List<BoundingBox> boundingBoxes)
+        {
+            var bb = boundingBoxes[0];
+            for (int j = 1; j < boundingBoxes.Count; j++)
+            {
+                bb = BoundingBox.Union(bb, boundingBoxes[j]);
+            }
+            height = bb.Max.Z - bb.Min.Z;
+            NoOfFloor = (int)Math.Ceiling(height / TypicalHeight);
+        }
+        #endregion
+
+        #region Event methods
+        private void Doc_ReplaceRhinoObject(object sender, RhinoReplaceObjectEventArgs e)
+        {
+            var boxList = new List<BoundingBox>();
+
+            for (int i = 0; i < selectedObjects.Count; i++)
+            {
+                if (selectedObjects[i].ObjectId == e.ObjectId)
+                {
+                    if (e.OldRhinoObject.Geometry.HasBrepForm)
+                    {
+                        var brep1 = Brep.TryConvertBrep(e.OldRhinoObject.Geometry);
+                        Footprint -= GetFloorArea(brep1);
+
+                        var brep2 = Brep.TryConvertBrep(e.NewRhinoObject.Geometry);
+                        Footprint += GetFloorArea(brep2);
+                        boxList.Add(brep2.GetBoundingBox(false));
+                    }
+                }
+                else
+                {
+                    boxList.Add(selectedObjects[i].Brep().GetBoundingBox(false));
+                }
+            }
+            SetHeight(boxList);
+        }
+        #endregion
     }
-    #endregion
-
-    #region private methods
-
-    #endregion
 }
 

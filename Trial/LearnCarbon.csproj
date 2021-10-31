@@ -32,7 +32,11 @@
     <None Remove="Fonts\Poppins-SemiBoldItalic.ttf" />
     <None Remove="Fonts\Poppins-Thin.ttf" />
     <None Remove="Fonts\Poppins-ThinItalic.ttf" />
+    <None Remove="Resources\cth.png" />
     <None Remove="Resources\logo.png" />
+    <None Remove="Resources\rc.png" />
+    <None Remove="Resources\sch.png" />
+    <None Remove="Resources\wo.png" />
   </ItemGroup>
   
   <ItemGroup>
@@ -70,7 +74,11 @@
     <Resource Include="Fonts\Poppins-SemiBoldItalic.ttf" />
     <Resource Include="Fonts\Poppins-Thin.ttf" />
     <Resource Include="Fonts\Poppins-ThinItalic.ttf" />
+    <Resource Include="Resources\cth.png" />
     <Resource Include="Resources\logo.png" />
+    <Resource Include="Resources\rc.png" />
+    <Resource Include="Resources\sch.png" />
+    <Resource Include="Resources\wo.png" />
   </ItemGroup>
   
   <ItemGroup>

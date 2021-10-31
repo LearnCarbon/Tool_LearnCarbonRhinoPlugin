@@ -163,6 +163,34 @@ namespace GWPEstimator.ViewModel.ViewModel
             get { return output; }
             set { output = value; OnPropertyChange(); }
         }
+
+        private bool isConWoodHyb;
+        public bool IsConWoodHyb
+        {
+            get { return isConWoodHyb; }
+            set { isConWoodHyb = value; OnPropertyChange(); }
+        }
+
+        private bool isWood;
+        public bool IsWood
+        {
+            get { return isWood; }
+            set { isWood = value; OnPropertyChange(); }
+        }
+
+        private bool isSteConHyb;
+        public bool IsSteConHyb
+        {
+            get { return isSteConHyb; }
+            set { isSteConHyb = value; OnPropertyChange(); }
+        }
+
+        private bool isRc;
+        public bool IsRc
+        {
+            get { return isRc; }
+            set { isRc = value; OnPropertyChange(); }
+        }
         #endregion
 
         #endregion
@@ -185,7 +213,6 @@ namespace GWPEstimator.ViewModel.ViewModel
             SelectCommand = new RelayCommand(SelectModelObj, null);
         }
         #endregion
-
 
         #region Command Methods
         private void SelectModelObj()
@@ -275,99 +302,144 @@ namespace GWPEstimator.ViewModel.ViewModel
         }
         private void Calculate()
         {
-            var path = @"C:\Users\Default\Desktop\testGh.gh";
-            var io = new GH_DocumentIO();
-            io.Open(path);
-
-            GrasshopperDocument = io.Document;
-
-            var activeObjects = GrasshopperDocument.ActiveObjects();
-            Output = string.Empty;
-            foreach (var obj in activeObjects)
+            try
             {
-                if (obj is Grasshopper.Kernel.Special.GH_Panel)
+                var path = @"C:\Users\Default\Desktop\testGh.gh";
+                var io = new GH_DocumentIO();
+                io.Open(path);
+
+                GrasshopperDocument = io.Document;
+
+                var activeObjects = GrasshopperDocument.ActiveObjects();
+                Output = string.Empty;
+                foreach (var obj in activeObjects)
                 {
-                    var panel = obj as Grasshopper.Kernel.Special.GH_Panel;
-                    if (panel.NickName == "FP")
+                    if (obj is Grasshopper.Kernel.Special.GH_Panel)
                     {
-                        panel.SetUserText(Footprint.ToString());
-                    }
-                    else if (panel.NickName == "NF")
-                    {
-                        panel.SetUserText(NoOfFloor.ToString());
+                        var panel = obj as Grasshopper.Kernel.Special.GH_Panel;
+                        if (panel.NickName == "FP")
+                        {
+                            panel.SetUserText(Footprint.ToString());
+                        }
+                        else if (panel.NickName == "NF")
+                        {
+                            panel.SetUserText(NoOfFloor.ToString());
 
-                    }
-                    else if (panel.NickName == "LO")
-                    {
-                        if (Location == "Africa")
-                            panel.SetUserText("0");
-                        else if (Location == "Asia-Pacific")
-                            panel.SetUserText("1");
-                        else if (Location == "Europe")
-                            panel.SetUserText("2");
-                        else if (Location == "Middle East")
-                            panel.SetUserText("3");
-                        else if (Location == "North America")
-                            panel.SetUserText("4");
-                        else
-                            panel.SetUserText("5");
-                    }
-                    else if (panel.NickName == "BT")
-                    {
-                        if (IsCommercial)
-                            panel.SetUserText("0");
-                        else
-                            panel.SetUserText("1");
-                    }
-                    else if (panel.NickName == "TA")
-                    {
-                        panel.SetUserText(TotalArea.ToString());
+                        }
+                        else if (panel.NickName == "LO")
+                        {
+                            if (Location == "Africa")
+                                panel.SetUserText("0");
+                            else if (Location == "Asia-Pacific")
+                                panel.SetUserText("1");
+                            else if (Location == "Europe")
+                                panel.SetUserText("2");
+                            else if (Location == "Middle East")
+                                panel.SetUserText("3");
+                            else if (Location == "North America")
+                                panel.SetUserText("4");
+                            else
+                                panel.SetUserText("5");
+                        }
+                        else if (panel.NickName == "BT")
+                        {
+                            if (IsCommercial)
+                                panel.SetUserText("0");
+                            else
+                                panel.SetUserText("1");
+                        }
+                        else if (panel.NickName == "TA")
+                        {
+                            panel.SetUserText(TotalArea.ToString());
 
-                    }
-                    else if (panel.NickName == "OA")
-                    {
-                        panel.SetUserText(OptionA.ToString());
+                        }
+                        else if (panel.NickName == "OA")
+                        {
+                            panel.SetUserText(OptionA.ToString());
 
-                    }
-                    else if (panel.NickName == "OB")
-                    {
-                        panel.SetUserText(OptionB.ToString());
+                        }
+                        else if (panel.NickName == "OB")
+                        {
+                            panel.SetUserText(OptionB.ToString());
 
-                    }
-                    else if (panel.NickName == "TS")
-                    {
-                        if (IsTimber)
-                            panel.SetUserText("2");
-                        else if (IsConcreteTimber)
-                            panel.SetUserText("3");
-                        else if (IsConcrete)
-                            panel.SetUserText("0");
-                        else /*if (IsSteelConcrete)*/
-                            panel.SetUserText("1");
-                        //else
-                        //    panel.SetUserText("Steel");
-                    }
-                    else if (panel.NickName == "TC")
-                    {
-                        panel.SetUserText(TargetCo2.ToString());
-                    }
-                    else if (panel.NickName == "OT")
-                    {
-                        panel.ExpireSolution(true);
-                        panel.CollectData();
-                        foreach (var data in panel.VolatileData.AllData(true))
-                            Output += " " + data.ToString();
+                        }
+                        else if (panel.NickName == "TS")
+                        {
+                            if (IsTimber)
+                                panel.SetUserText("2");
+                            else if (IsConcreteTimber)
+                                panel.SetUserText("3");
+                            else if (IsConcrete)
+                                panel.SetUserText("0");
+                            else /*if (IsSteelConcrete)*/
+                                panel.SetUserText("1");
+                            //else
+                            //    panel.SetUserText("Steel");
+                        }
+                        else if (panel.NickName == "TC")
+                        {
+                            panel.SetUserText(TargetCo2.ToString());
+                        }
+                        else if (panel.NickName == "OT")
+                        {
+                            panel.ExpireSolution(true);
+                            panel.CollectData();
+                            foreach (var data in panel.VolatileData.AllData(true))
+                                Output += " " + data.ToString();
 
-                        if (OptionA)
-                            Output += " tCo2e";
+                            if (OptionA)
+                            {
+                                IsConWoodHyb = false;
+                                IsWood = false;
+                                IsSteConHyb = false;
+                                IsRc = false;
+                                Output += " tCo2e";
+                            }
+                            else if (OptionB)
+                            {
+                                if (Output == "Wood-Hybrid")
+                                {
+                                    IsConWoodHyb = true;
+                                    IsWood = false;
+                                    IsSteConHyb = false;
+                                    IsRc = false;
+                                }
+                                else if (Output == "Wood")
+                                {
+                                    IsConWoodHyb = false;
+                                    IsWood = true;
+                                    IsSteConHyb = false;
+                                    IsRc = false;
+                                }
+                                else if (Output == "Steel-Concrete")
+                                {
+                                    IsConWoodHyb = false;
+                                    IsWood = false;
+                                    IsSteConHyb = true;
+                                    IsRc = false;
+                                }
+                                else
+                                {
+                                    IsConWoodHyb = false;
+                                    IsWood = false;
+                                    IsSteConHyb = false;
+                                    IsRc = true;
+                                }
+                            }
+                        }
                     }
                 }
             }
+            catch (Exception e)
+            {
+                Output = e.Message;
+            }
         }
-        #endregion
-
-        #region private methods
-
-        #endregion
     }
+    #endregion
+
+    #region private methods
+
+    #endregion
 }
+

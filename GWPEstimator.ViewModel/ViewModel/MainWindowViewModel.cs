@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Rhino.Geometry;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
 
 namespace GWPEstimator.ViewModel.ViewModel
 {
@@ -268,14 +269,11 @@ namespace GWPEstimator.ViewModel.ViewModel
         {
             try
             {
-                string path = string.Empty;
+                string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var path = Path.Combine(assemblyFolder, "LearnCarbon.gh");
 
-                if (File.Exists(@"C:\Users\Default\Desktop\testGh.gh"))
-                    path = @"C:\Users\Default\Desktop\testGh.gh";
-                else if (File.Exists(@"C: \Users\Admin\Desktop\testGh.gh"))
-                    path = @"C:\Users\Admin\Desktop\testGh.gh";
-                else
-                    throw new Exception("File not found in C:\\Users\\Default\\Desktop\\testGh.gh");
+                if (!(File.Exists(path)))
+                    throw new Exception($"File not found in " + path);
 
                 var io = new GH_DocumentIO();
                 io.Open(path);

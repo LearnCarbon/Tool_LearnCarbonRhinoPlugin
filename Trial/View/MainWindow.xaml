@@ -175,7 +175,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="Co2 Target:" />
+                            <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="tCo2e Target:" />
                             <TextBox Grid.Row="0" Grid.Column="1"  Margin="5" Text="{Binding TargetCo2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                         </Grid>

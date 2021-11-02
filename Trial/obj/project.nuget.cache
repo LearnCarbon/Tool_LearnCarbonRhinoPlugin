@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "06pImva8JFoAR5i3ryXvY38+1njpRANpkugi+Ri+cB5JlgH0qc43MmZNpP61JUnC9HOKMTjAjaFIepeeb8G00Q==",
+  "success": true,
+  "projectFilePath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\Trial\\LearnCarbon.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\rhinocommon\\7.4.21078.1001\\rhinocommon.7.4.21078.1001.nupkg.sha512"
+  ],
+  "logs": []
+}

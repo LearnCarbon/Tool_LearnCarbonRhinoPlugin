@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\Trial\\LearnCarbon.csproj": {}
+  },
+  "projects": {
+    "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.Helper\\GWPEstimator.Helper.csproj": {
+      "restore": {
+        "projectUniqueName": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.Helper\\GWPEstimator.Helper.csproj",
+        "projectName": "GWPEstimator.Helper",
+        "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.Helper\\GWPEstimator.Helper.csproj"
+      },
+      "frameworks": {
+        "net45": {}
+      }
+    },
+    "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.ViewModel\\GWPEstimator.ViewModel.csproj": {
+      "restore": {
+        "projectUniqueName": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.ViewModel\\GWPEstimator.ViewModel.csproj",
+        "projectName": "GWPEstimator.ViewModel",
+        "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.ViewModel\\GWPEstimator.ViewModel.csproj",
+        "frameworks": {
+          "net45": {
+            "projectReferences": {
+              "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.Helper\\GWPEstimator.Helper.csproj": {
+                "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.Helper\\GWPEstimator.Helper.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net45": {}
+      }
+    },
+    "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\Trial\\LearnCarbon.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\Trial\\LearnCarbon.csproj",
+        "projectName": "LearnCarbon",
+        "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\Trial\\LearnCarbon.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\Trial\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.ViewModel\\GWPEstimator.ViewModel.csproj": {
+                "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\GWPEstimator.ViewModel\\GWPEstimator.ViewModel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "RhinoCommon": {
+              "include": "Compile, Build",
+              "target": "Package",
+              "version": "[7.4.21078.1001, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

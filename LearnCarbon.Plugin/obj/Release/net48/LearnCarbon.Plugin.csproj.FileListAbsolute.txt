@@ -1,0 +1,17 @@
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\bin\Release\net48\LearnCarbon.Plugin.rhp
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\bin\Release\net48\LearnCarbon.Plugin.pdb
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.csproj.AssemblyReference.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\View\MainWindow.g.cs
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin_MarkupCompile.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin_MarkupCompile.lref
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\View\MainWindow.baml
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.g.resources
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.Properties.Resources.resources
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.csproj.GenerateResource.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.GeneratedMSBuildEditorConfig.editorconfig
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.AssemblyInfoInputs.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.AssemblyInfo.cs
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.csproj.CoreCompileInputs.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.csproj.CopyComplete
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.rhp
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Plugin\obj\Release\net48\LearnCarbon.Plugin.pdb

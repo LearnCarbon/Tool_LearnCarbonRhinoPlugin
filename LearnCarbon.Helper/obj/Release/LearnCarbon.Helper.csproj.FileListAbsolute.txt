@@ -1,0 +1,13 @@
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\LearnCarbon.Helper.dll
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\LearnCarbon.Helper.pdb
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\Eto.dll
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\Newtonsoft.Json.Rhino.dll
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\Rhino.UI.dll
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\RhinoCommon.dll
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\Eto.xml
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\bin\Release\RhinoCommon.xml
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\obj\Release\LearnCarbon.Helper.csproj.AssemblyReference.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\obj\Release\LearnCarbon.Helper.csproj.CoreCompileInputs.cache
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\obj\Release\LearnCarbon.Helper.csproj.CopyComplete
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\obj\Release\LearnCarbon.Helper.dll
+F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.Helper\obj\Release\LearnCarbon.Helper.pdb

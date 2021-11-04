@@ -388,12 +388,19 @@ namespace GWPEstimator.ViewModel.ViewModel
                                     IsSteConHyb = true;
                                     IsRc = false;
                                 }
-                                else
+                                else if(string.Equals(Output, "Concrete"))
                                 {
                                     IsConWoodHyb = false;
                                     IsWood = false;
                                     IsSteConHyb = false;
                                     IsRc = true;
+                                }
+                                else
+                                {
+                                    IsConWoodHyb = false;
+                                    IsWood = false;
+                                    IsSteConHyb = false;
+                                    IsRc = false;
                                 }
                             }
                         }

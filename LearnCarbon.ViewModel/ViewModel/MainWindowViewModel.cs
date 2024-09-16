@@ -24,6 +24,9 @@ namespace LearnCarbon.ViewModel.ViewModel
         double height;
         List<ObjRef> selectedObjects;
 
+        // Temp to setup
+        private readonly string pythonScriptPath;
+
         #region Properties
 
         #region Selection
@@ -228,6 +231,8 @@ namespace LearnCarbon.ViewModel.ViewModel
             CalculateCommand = new RelayCommand(Calculate, null);
             SelectCommand = new RelayCommand(SelectModelObj, null);
             RhinoDoc.ReplaceRhinoObject += Doc_ReplaceRhinoObject;
+
+            pythonScriptPath = @"C:\Reope\GitHub\src\run_ml.py";
         }
         #endregion
 
@@ -354,8 +359,9 @@ namespace LearnCarbon.ViewModel.ViewModel
                         {
                             panel.ExpireSolution(true);
                             panel.CollectData();
-                            foreach (var data in panel.VolatileData.AllData(true))
-                                Output += data.ToString();
+                            //foreach (var data in panel.VolatileData.AllData(true))
+                            //    Output += data.ToString();
+                            RunPythonScript();
 
                             if (OptionA)
                             {
@@ -388,7 +394,7 @@ namespace LearnCarbon.ViewModel.ViewModel
                                     IsSteConHyb = true;
                                     IsRc = false;
                                 }
-                                else if(string.Equals(Output, "Concrete"))
+                                else if (string.Equals(Output, "Concrete"))
                                 {
                                     IsConWoodHyb = false;
                                     IsWood = false;
@@ -411,6 +417,20 @@ namespace LearnCarbon.ViewModel.ViewModel
             {
                 Output = e.Message;
             }
+        }
+
+        public void RunPythonScript()
+        {
+            // Use the path here
+            string rhinoScriptCommand = $"-ScriptEditor _Run \"{pythonScriptPath}\"";
+            RhinoApp.RunScript(rhinoScriptCommand, false);
+            // Read the result from the file
+            string resultFilePath = @"C:\Reope\GitHub\src\log\prediction_result.txt";
+            string numPrediction = System.IO.File.ReadAllText(resultFilePath);
+
+            // Output the result (or use it as needed)
+            RhinoApp.WriteLine($"Prediction result: {numPrediction}");
+            int debug = 0;
         }
         #endregion
 

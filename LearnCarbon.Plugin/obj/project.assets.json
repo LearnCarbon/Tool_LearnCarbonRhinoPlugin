@@ -2,19 +2,44 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
-      "RhinoCommon/7.4.21078.1001": {
+      "RhinoCommon/8.11.24254.15001": {
         "type": "package",
         "compile": {
-          "lib/net45/Eto.dll": {},
-          "lib/net45/Newtonsoft.Json.Rhino.dll": {},
-          "lib/net45/Rhino.UI.dll": {},
-          "lib/net45/RhinoCommon.dll": {}
+          "lib/net48/Ed.Eto.dll": {
+            "related": ".xml"
+          },
+          "lib/net48/Eto.dll": {
+            "related": ".xml"
+          },
+          "lib/net48/Rhino.UI.dll": {},
+          "lib/net48/RhinoCommon.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/_._": {}
+          "lib/net48/_._": {
+            "related": ".xml"
+          }
         },
         "build": {
-          "build/RhinoCommon.targets": {}
+          "build/net48/RhinoCommon.targets": {}
+        }
+      },
+      "RhinoWindows/8.11.24254.15001": {
+        "type": "package",
+        "dependencies": {
+          "RhinoCommon": "[8.11.24254.15001]"
+        },
+        "compile": {
+          "lib/net48/Eto.Wpf.dll": {},
+          "lib/net48/RhinoWindows.dll": {}
+        },
+        "runtime": {
+          "lib/net48/Eto.Wpf.dll": {},
+          "lib/net48/RhinoWindows.dll": {}
+        },
+        "build": {
+          "build/net48/RhinoWindows.targets": {}
         }
       },
       "LearnCarbon.Helper/1.0.0": {
@@ -41,24 +66,40 @@
     }
   },
   "libraries": {
-    "RhinoCommon/7.4.21078.1001": {
-      "sha512": "OTKPJWTItUq/KJoh6Zsq5+1d1EQydE78BE1MnHitoiXfytaPZlCMO2+gFSALy/ueONYFI9zccvPTH40WbBEOqg==",
+    "RhinoCommon/8.11.24254.15001": {
+      "sha512": "wgAfJniX4HPm/xPMHth9hrtqcNia5ULI+te8BVC3e6UfmF6Jz1iOmtCK5Elz3mItUMv7QfccxGLsjusMr6HHoQ==",
       "type": "package",
-      "path": "rhinocommon/7.4.21078.1001",
+      "path": "rhinocommon/8.11.24254.15001",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Eto-LICENSE.txt",
-        "build/RhinoCommon.targets",
-        "lib/net45/Eto.dll",
-        "lib/net45/Eto.xml",
-        "lib/net45/Newtonsoft.Json.Rhino.dll",
-        "lib/net45/Rhino.UI.dll",
-        "lib/net45/RhinoCommon.XML",
-        "lib/net45/RhinoCommon.dll",
-        "rhinocommon.7.4.21078.1001.nupkg.sha512",
+        "build/net48/RhinoCommon.targets",
+        "lib/net48/Ed.Eto.dll",
+        "lib/net48/Ed.Eto.xml",
+        "lib/net48/Eto.dll",
+        "lib/net48/Eto.xml",
+        "lib/net48/Rhino.UI.dll",
+        "lib/net48/RhinoCommon.dll",
+        "lib/net48/RhinoCommon.xml",
+        "rhinocommon.8.11.24254.15001.nupkg.sha512",
         "rhinocommon.nuspec",
         "rhinocommon.png"
+      ]
+    },
+    "RhinoWindows/8.11.24254.15001": {
+      "sha512": "lh5q3VtEAbtqOgsGP/BlZ2dM9ZROIPevA2ByFYvEzRJJG/7vrM1+Gu/3643P9DOuRKV8mh+o8Eu9rjS7CZDnkQ==",
+      "type": "package",
+      "path": "rhinowindows/8.11.24254.15001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Eto-LICENSE.txt",
+        "build/net48/RhinoWindows.targets",
+        "lib/net48/Eto.Wpf.dll",
+        "lib/net48/RhinoWindows.dll",
+        "rhinowindows.8.11.24254.15001.nupkg.sha512",
+        "rhinowindows.nuspec"
       ]
     },
     "LearnCarbon.Helper/1.0.0": {
@@ -75,32 +116,25 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
       "LearnCarbon.ViewModel >= 1.0.0",
-      "RhinoCommon >= 7.4.21078.1001"
+      "RhinoCommon >= 8.11.24254.15001",
+      "RhinoWindows >= 8.11.24254.15001"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Iliana\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj",
+      "projectUniqueName": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj",
       "projectName": "LearnCarbon.Plugin",
-      "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\obj\\",
+      "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj",
+      "packagesPath": "C:\\Users\\Iliana\\.nuget\\packages\\",
+      "outputPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Iliana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net48"
@@ -113,8 +147,8 @@
         "net48": {
           "targetAlias": "net48",
           "projectReferences": {
-            "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj": {
-              "projectPath": "F:\\35_AEC_Hackathon\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj"
+            "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj": {
+              "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj"
             }
           }
         }
@@ -123,6 +157,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -132,10 +171,14 @@
           "RhinoCommon": {
             "include": "Compile, Build",
             "target": "Package",
-            "version": "[7.4.21078.1001, )"
+            "version": "[8.11.24254.15001, )"
+          },
+          "RhinoWindows": {
+            "target": "Package",
+            "version": "[8.11.24254.15001, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

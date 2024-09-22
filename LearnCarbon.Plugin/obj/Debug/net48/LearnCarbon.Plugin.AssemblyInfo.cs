@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Description of Trial")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+c6a5161f6b445a1e361b2323e40961c03b1ab707")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+7cb77bd08ec3ede7c5dd365d08806c4eede2c84d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LearnCarbon.Plugin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LearnCarbon.Plugin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

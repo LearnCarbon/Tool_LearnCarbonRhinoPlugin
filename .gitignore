@@ -1,8 +1,6 @@
+.vs/
 
-.vs/LearnCarbon/v17/DocumentLayout.json
-.vs/LearnCarbon/v17/DocumentLayout.backup.json
-.vs/LearnCarbon/v17/.suo
-.vs/LearnCarbon/FileContentIndex/06821352-a3e1-440c-9a42-2fe823a19e4f.vsidx
-.vs/LearnCarbon/DesignTimeBuild/.dtbcache.v2
-.vs/LearnCarbon/DesignTimeBuild/.dtbcache.v2
-.vs/LearnCarbon/DesignTimeBuild/.dtbcache.v2
+LearnCarbon.ViewModel/obj/Debug/*
+
+LearnCarbon.Plugin/obj/Debug/*
+

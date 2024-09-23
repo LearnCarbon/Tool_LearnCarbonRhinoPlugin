@@ -21,6 +21,7 @@ namespace LearnCarbon.ViewModel.ViewModel
         // Temp to setup
         private readonly string pythonScriptPath;
         private readonly string resultFilePath;
+        private readonly string inputFilePath;
 
         #region Properties
 
@@ -233,6 +234,7 @@ namespace LearnCarbon.ViewModel.ViewModel
             // Navigate to the 'src' folder and then to 'run_ml.py'
             pythonScriptPath = Path.Combine(repoDirectory, "src", "run_ml.py");
             resultFilePath = Path.Combine(repoDirectory, "src", "log", "prediction_result.txt");
+            inputFilePath = Path.Combine(repoDirectory, "src", "log", "input.txt");
 
 
             if (File.Exists(pythonScriptPath))
@@ -280,6 +282,7 @@ namespace LearnCarbon.ViewModel.ViewModel
             {
                 // TO DO run this for every selected object and create a parallel list with Co2
                 RunPythonScript(optionA == true);
+                //RunPythonScriptDEBUG();
 
             }
             catch (Exception e)
@@ -290,62 +293,64 @@ namespace LearnCarbon.ViewModel.ViewModel
 
         public void RunPythonScript(bool optionA)
         {
-            string rhinoScriptCommand;
-            if (optionA)
+            try
             {
-                int constructionType = 0;
-                if (IsSteelConcrete) constructionType = 1;
-                else if (IsTimber) constructionType = 2;
-                else if (IsConcreteTimber) constructionType = 3;
+                // Write inputs to the input file
+                using (StreamWriter sw = new StreamWriter(inputFilePath))
+                {
+                    int buildingType = IsResidential ? 1 : 0;
 
-                int buildingType = 0;
-                if (IsResidential) buildingType = 1;
+                    int location = 0;
+                    switch (Location)
+                    {
+                        case "Asia-Pacific":
+                            location = 1;
+                            break;
+                        case "Europe":
+                            location = 2;
+                            break;
+                        case "Middle East":
+                            location = 3;
+                            break;
+                        case "North America":
+                            location = 4;
+                            break;
+                        default:
+                            location = 5;
+                            break;
+                    }
 
-                int location = 0;
-                if (Location == "Asia-Pacific")
-                    location = 1;
-                else if (Location == "Europe")
-                    location = 2;
-                else if (Location == "Middle East")
-                    location = 3;
-                else if (Location == "North America")
-                    location = 4;
+                    if (optionA)
+                    {
+                        int constructionType = 0;
+                        if (IsSteelConcrete) constructionType = 1;
+                        else if (IsTimber) constructionType = 2;
+                        else if (IsConcreteTimber) constructionType = 3;
+
+                        // Write modelA inputs to file
+                        sw.WriteLine($"{optionA},{constructionType},{buildingType},{location},{TotalArea},{noOfFloor}");
+                    }
+                    else
+                    {
+                        // Write modelB input to file
+                        sw.WriteLine($"{optionA},{targetCo2},{buildingType},{location},{TotalArea},{noOfFloor}");
+                    }
+                }
+
+                string rhinoScriptCommand = $"-_ScriptEditor _Run \"{pythonScriptPath}\"";
+                bool debug = RhinoApp.RunScript(rhinoScriptCommand, false);
+
+                // Read the result from the result file
+                string prediction = System.IO.File.ReadAllText(resultFilePath);
+
+                if(optionA)
+                    Output = $"{prediction} tCo2e";
                 else
-                    location = 5;
-
-                rhinoScriptCommand = $"-ScriptEditor _Run \"{pythonScriptPath}\" {constructionType} {buildingType} {location} {TotalArea} {noOfFloor}";
-                RhinoApp.RunScript(rhinoScriptCommand, false);
-
-                try
-                {
-                    string prediction = System.IO.File.ReadAllText(resultFilePath);
-
-                    // Output the result or use it as needed
-                    RhinoApp.WriteLine($"Prediction result: {prediction}");
-                    Output = (string)prediction + " tCo2e";
-                }
-                catch (Exception ex)
-                {
-                    RhinoApp.WriteLine($"Error reading the prediction result: {ex.Message}");
-                }
+                    Output = prediction;
             }
-            else
+            catch (Exception ex)
             {
-                rhinoScriptCommand = $"-ScriptEditor _Run \"{pythonScriptPath}\" {targetCo2}";
-                RhinoApp.RunScript(rhinoScriptCommand, false);
-
-                try
-                {
-                    string prediction = System.IO.File.ReadAllText(resultFilePath);
-
-                    // Output the result or use it as needed
-                    RhinoApp.WriteLine($"Prediction result: {prediction}");
-                    Output = (string)prediction;
-                }
-                catch (Exception ex)
-                {
-                    RhinoApp.WriteLine($"Error reading the prediction result: {ex.Message}");
-                }
+                RhinoApp.WriteLine($"Error: {ex.Message}");
             }
         }
         #endregion

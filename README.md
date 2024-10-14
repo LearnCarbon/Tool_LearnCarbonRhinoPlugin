@@ -13,6 +13,7 @@ Looking at the projected construction growth between now and 2040, it's clear th
 - **Model B**: Input area, total built-up space, and target GWP value to predict the most suitable structural type to meet sustainability goals.
 
 For more information, visit [LearnCarbon](https://learncarbon.me/).
+![LearnCarbon-scriptEditor-flow](https://github.com/user-attachments/assets/0bc22511-0ef6-4b95-a143-3ac3d5b3a2c9)
 
 ---
 

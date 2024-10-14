@@ -40,7 +40,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="RhinoCommon" Version="7.4.21078.1001" IncludeAssets="compile;build" />
+    <PackageReference Include="RhinoCommon" Version="8.11.24254.15001" IncludeAssets="compile;build" />
+    <PackageReference Include="RhinoWindows" Version="8.11.24254.15001" />
   </ItemGroup>
   
   <ItemGroup>

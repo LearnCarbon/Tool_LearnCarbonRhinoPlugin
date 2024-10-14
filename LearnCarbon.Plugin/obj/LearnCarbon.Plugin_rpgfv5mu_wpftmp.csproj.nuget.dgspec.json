@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj": {}
+  },
+  "projects": {
+    "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Helper\\LearnCarbon.Helper.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Helper\\LearnCarbon.Helper.csproj",
+        "projectName": "LearnCarbon.Helper",
+        "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Helper\\LearnCarbon.Helper.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj",
+        "projectName": "LearnCarbon.Plugin",
+        "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\LearnCarbon.Plugin.csproj",
+        "packagesPath": "C:\\Users\\Iliana\\.nuget\\packages\\",
+        "outputPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Plugin\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Iliana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj": {
+                "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "RhinoCommon": {
+              "include": "Compile, Build",
+              "target": "Package",
+              "version": "[7.4.21078.1001, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj",
+        "projectName": "LearnCarbon.ViewModel",
+        "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.ViewModel\\LearnCarbon.ViewModel.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Helper\\LearnCarbon.Helper.csproj": {
+                "projectPath": "C:\\Reope\\GitHub\\Tool_LearnCarbonRhinoPlugin\\LearnCarbon.Helper\\LearnCarbon.Helper.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    }
+  }
+}

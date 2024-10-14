@@ -1,0 +1,1144 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ed.Eto</name>
+    </assembly>
+    <members>
+        <member name="T:Ed.Eto.BreakpointsChangedEventArgs">
+            <summary>
+            Data passed to the BreakpointsChanged event
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.BreakpointsChangedEventArgs.BreakpointLineNumbers">
+            <summary>
+            Line numbers that have breakpoints
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.BreakpointsChangedEventArgs.Breakpoints">
+            <summary>
+            Line numbers that have breakpoints and their state (enabled/disabled)
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.BreakpointsChangedEventArgs.#ctor(System.Collections.Generic.IList{System.ValueTuple{System.Int32,System.Boolean}})">
+            <summary>
+            The only constructor
+            </summary>
+            <param name="breakpoints"></param>
+        </member>
+        <member name="T:Ed.Eto.ContentChangedEventArgs">
+            <summary>
+            Describes the changes to the text of a document.
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContentChangedEventArgs.Changes">
+            <summary>
+            Most of the time the list will contain one item. One example where more than one change is returned is when the editor has multiple cursors. 
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.ContentChangedEventArgs.#ctor(System.Collections.Generic.IList{System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String}})">
+            <summary>
+            The only constructor
+            </summary>
+            <param name="changes"></param>
+        </member>
+        <member name="T:Ed.Eto.ContextMenuEventArgs">
+            <summary>
+            Describes the cursor position in the text document and mouse position relative to the control
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContextMenuEventArgs.StartLine">
+            <summary>
+            Line number. Starts with 1.
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContextMenuEventArgs.StartCharacter">
+            <summary>
+            Character position or column number. Starts with 1
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContextMenuEventArgs.EndLine">
+            <summary>
+            Line number. Stars with 1.
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContextMenuEventArgs.EndCharacter">
+            <summary>
+            Character position or column number. Starts with 1
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContextMenuEventArgs.X">
+            <summary>
+            mouse x position relative to the control. Left edge is 0.
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ContextMenuEventArgs.Y">
+            <summary>
+            mouse y position relative to the control. Top edge is 0.
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.ContextMenuEventArgs.#ctor(System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            The only constructor
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:Ed.Eto.Ed">
+            <summary>
+            Code editor control
+            </summary>
+        </member>
+        <member name="E:Ed.Eto.Ed.EditorInitialized">
+            <summary>
+            Event that gets fired as soon as the editor initialization is complete
+            </summary>
+            <remarks>
+            You can inspect any methods that return values in this event, such as <see cref="M:Ed.Eto.Ed.GetLanguageIdsAsync"/>.
+            </remarks>
+        </member>
+        <member name="E:Ed.Eto.Ed.EditorInitializing">
+            <summary>
+            Event that gets fired while the editor is initializing to do any setup
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.Ed.EditorIsInitialized">
+            <summary>
+            Editor is initialized
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.Focus">
+            <summary>
+            Focus the editor
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.#ctor(System.String,System.String,System.Boolean,System.Int32,System.Boolean,System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}},System.Action{System.String},System.Boolean,System.Boolean,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Main constructor
+            </summary>
+            <param name="languageId"></param>
+            <param name="text"></param>
+            <param name="replaceTabsWithSpaces"></param>
+            <param name="tabSize"></param>
+            <param name="darkMode"></param>
+            <param name="getCompletions"></param>
+            <param name="logger"></param>
+            <param name="disableContextMenu"></param>
+            <param name="disableSearchAndReplace"></param>
+            <param name="enableBreakpointSupport"></param>
+            <param name="fileName"></param>
+            <param name="readOnly"></param>
+        </member>
+        <member name="P:Ed.Eto.Ed.ReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.AutoCompleteIsEnabledWhenSignatureHelpWindowIsOpen">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.WordBasedAutoCompleteIsEnabled">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.WhitespaceVisible">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetIndentationGuidesVisibleAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetIndentationGuidesVisibleAsync(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.InsertSpaces">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.TabSize">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.LineNumbersEnabled">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetIndentationSettingsBasedOnContentAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.NormalizeIndentationAsync">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.FontFamily">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.FontSize">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.IncreaseFontSize">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.DecreaseFontSize">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ResetFontSize">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.FileName">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetCurrentPositionAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetWordAtCurrentPositionAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetSelectedTextAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetLineTextAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetTextAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetTextAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.InsertTextAtCursorPositionAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.InsertTextAsync(System.String,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.RemoveTextAsync(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ReplaceTextAsync(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ReplaceSelectedTextAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.FoldAllMarkerRegionsAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.FoldLevel1Async">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.UnfoldAllMarkerRegionsAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.UnfoldAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.Theme">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetLanguageIdsAsync">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.LanguageId">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.MinimapEnabled">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.VerticalScrollbarEnabled">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.VerticalScrollbarWidth">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.HorizontalScrollbarEnabled">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.HorizontalScrollbarWidth">
+            <inheritdoc />
+        </member>
+        <member name="P:Ed.Eto.Ed.BreakpointSupportEnabled">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetAndRevealCursorPositionAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetCodeCompletionWindowIsVisibleAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.AddDiagnosticsAsync(System.Collections.Generic.IList{System.ValueTuple{System.String,Ed.Eto.DiagnosticSeverity,System.Int32,System.Int32,System.Int32,System.Int32}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ClearDiagnosticsAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetLinesPartitionedByReadOnlyPropertyAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetLinesPartitionedByReadOnlyPropertyAsync(System.Collections.Generic.IList{System.ValueTuple{System.Boolean,System.Collections.Generic.IList{System.String}}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetLinesAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetLinesAsync(System.Collections.Generic.IList{System.ValueTuple{System.Boolean,System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetTextAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetTextAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetTextAndReadOnlyLineNumbersAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetTextAndReadOnlyLineNumbersAsync(System.String,System.Collections.Generic.IList{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.FindMatchesAsync(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GotoFindMatchStartingAtPositionAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.FindNextMatchAsync(System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.FindPreviousMatchAsync(System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ReplaceFindMatchesAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ReplaceFindMatchAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ClearFindMatchesAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ToggleBreakpointAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ToggleBreakpointAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetBreakpointAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.SetDisabledBreakpointAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ClearBreakpointAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetBreakpointLineNumbersAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetBreakpointsAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ClearAllBreakpointsAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.BreakOnLineAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.BreakOnLineWithExceptionAsync(System.Int32,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.BreakOnLineWithExceptionAsync(System.Int32,System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.BreakOnLineWithExceptionAsync(System.Int32,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.CancelBreakOnLineAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.CancelBreakOnLineAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.ErrorOnLineAsync(System.Int32,System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.CancelErrorOnLineAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.CancelErrorOnAllLinesAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.GetSupportedActionsAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.TriggerActionAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="E:Ed.Eto.Ed.ContentChanged">
+            <inheritdoc />
+        </member>
+        <member name="E:Ed.Eto.Ed.ErrMsgClicked">
+            <inheritdoc />
+        </member>
+        <member name="E:Ed.Eto.Ed.ContextMenu">
+            <inheritdoc />
+        </member>
+        <member name="E:Ed.Eto.Ed.BreakpointsChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Ed.Eto.Ed.RegisterGetCompletionsAsync(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}})">
+            <summary>
+            Simple scenarios where triggers are hard coded and there is no distinction between completions and signature help.
+            In most cases using RegisterProvideCompletions and RegisterProvideSignatureHelp is better
+            </summary>
+            <param name="getCompletions"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.RegisterProvideCompletionsAsync(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}},System.Collections.Generic.List{System.Char})">
+            <summary>
+            register code completion provider
+            </summary>
+            <param name="provideCompletions"></param>
+            <param name="triggers"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.RegisterProvideCompletionsWithCompletionItemKindsAsync(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.ValueTuple{System.String,System.String}}}},System.Collections.Generic.List{System.Char})">
+            <summary>
+            register code completion provider
+            </summary>
+            <param name="provideCompletions"></param>
+            <param name="triggers"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.RegisterProvideCompletionsWithCompletionItemKindsAsync(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.ValueTuple{System.String,System.String}}}},System.Func{System.String,System.Threading.Tasks.Task{System.ValueTuple{System.String,System.String}}},System.Collections.Generic.List{System.Char})">
+            <summary>
+            register code completion provider
+            </summary>
+            <param name="provideCompletions"></param>
+            <param name="resolveCompletionItem"></param>
+            <param name="triggers"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.RegisterProvideSignatureHelpAsync(System.Func{System.String,System.Int32,System.Threading.Tasks.Task{System.ValueTuple{System.Int32,System.Int32,System.Collections.Generic.IList{System.ValueTuple{System.Int32,System.String,System.String,System.Collections.Generic.IList{System.ValueTuple{System.String,System.String}}}}}}})">
+            <summary>
+            register signature help provider
+            </summary>
+            <param name="provideSignatureHelp"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.RegisterProvideHoverInfoAsync(System.Func{System.String,System.Int32,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}})">
+            <summary>
+            register hover info provider
+            </summary>
+            <param name="provideHoverInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.Ed.ConnectToLanguageServerAsync(System.Int32,System.String)">
+            <summary>
+            Experimental undocumented language server integration
+            </summary>
+            <param name="serverPortNumber"></param>
+            <param name="langId"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.ShowDevTools">
+            <summary>
+            dev tools
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.EnableEdCommandsAsync">
+            <summary>
+            internal, undocumented, experimental feature
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.SplitStringWithEol(System.String)">
+            <summary>
+            Split string with Eol and return as a collection
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="T:Ed.Eto.Ed.IHandler">
+            <summary>
+            Interface for methods that are implemented differently on each platform
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.Ed.IHandler.ExecuteScriptFunctionAsync">
+            <summary>
+            Execute javascript async
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.Ed.IHandler.Logger">
+            <summary>
+            For logging platform specific errors
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterEdCommands(System.Action{System.String})">
+            <summary>
+            undocumented feature. Not implemented yet.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterGetCompletions(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}})">
+            <summary>
+            RegisterGetCompletions handler
+            </summary>
+            <param name="getCompletions"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterProvideCompletions(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}})">
+            <summary>
+            RegisterProvideCompletions handler
+            </summary>
+            <param name="provideCompletions"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterProvideCompletions(System.Func{System.String,System.Int32,System.Int32,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{Ed.Common.CompletionItem}}})">
+            <summary>
+            RegisterProvideCompletions handler
+            </summary>
+            <param name="provideCompletions"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterProvideCompletionsWithSymbolKinds(System.Func{System.String,System.Int32,System.Char,System.Threading.Tasks.Task{System.Collections.Generic.List{System.ValueTuple{System.String,System.String}}}})">
+            <summary>
+            RegisterProvideCompletionsWithSymbolKinds handler
+            </summary>
+            <param name="provideCompletions"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterResolveCompletionItem(System.Func{System.String,System.Threading.Tasks.Task{System.ValueTuple{System.String,System.String}}})">
+            <summary>
+            RegisterResolveCompletionItem handler
+            </summary>
+            <param name="resolveCompletionItem"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterResolveCompletionItem(System.Func{System.String,System.Int32,Ed.Common.CompletionItem,System.Threading.Tasks.Task{Ed.Common.CompletionItem}})">
+            <summary>
+            RegisterResolveCompletionItem handler
+            </summary>
+            <param name="resolveCompletionItem"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterProvideSignatureHelp(System.Func{System.String,System.Int32,System.Threading.Tasks.Task{System.ValueTuple{System.Int32,System.Int32,System.Collections.Generic.IList{System.ValueTuple{System.Int32,System.String,System.String,System.Collections.Generic.IList{System.ValueTuple{System.String,System.String}}}}}}})">
+            <summary>
+            RegisterProvideSignatureHelp handler registration
+            </summary>
+            <param name="provideSignatureHelp"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.RegisterProvideHoverInfo(System.Func{System.String,System.Int32,System.Threading.Tasks.Task{System.Collections.Generic.List{System.String}}})">
+            <summary>
+            Register Hover Provider
+            </summary>
+            <param name="provideHoverInfo"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.SubscribeToMonacoModelContentChangedEvent(System.Action{System.String})">
+            <summary>
+            ContentChanged event handler subscription
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.UnsubscribeToMonacoModelContentChangedEvent">
+            <summary>
+            unsubscribe to ContentChanged event handler
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.SubscribeToErrMsgClickedEvent(System.Action{System.String})">
+            <summary>
+            ErrMsgClicked event handler subscription
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.SubscribeToMonacoContextMenuEvent(System.Action{System.String})">
+            <summary>
+            ContextMenu event handler
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.UnsubscribeToMonacoContextMenuEvent">
+            <summary>
+            ContextMenu event handler unsubscribe
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.SubscribeToMonacoModelBreakpointsChangedEvent(System.Action{System.String})">
+            <summary>
+            BreakpointsChanged event handler subscription
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Ed.Eto.Ed.IHandler.ShowDevTools">
+            <summary>
+            Developer tools
+            </summary>
+        </member>
+        <member name="T:Ed.Eto.LineDecorationMarginIcon">
+            <summary>
+            Available line decoration margin icons
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.LineDecorationMarginIcon.Debug">
+            <summary>
+            Debug
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.LineDecorationMarginIcon.Error">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.LineDecorationMarginIcon.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="T:Ed.Eto.BuiltInTheme">
+            <summary>
+            Supported themes
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.BuiltInTheme.VisualStudioLight">
+            <summary>
+            VisualStudioLight
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.BuiltInTheme.VisualStudioDark">
+            <summary>
+            VisualStudioDark
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.BuiltInTheme.HighContrastBlack">
+            <summary>
+            HighContrastBlack
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.BuiltInTheme.Unknown">
+            <summary>
+            Unknown
+            </summary>
+        </member>
+        <member name="T:Ed.Eto.DiagnosticSeverity">
+            <summary>
+            Diagnostic Severity
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.DiagnosticSeverity.Error">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.DiagnosticSeverity.Warning">
+            <summary>
+            Warning
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.DiagnosticSeverity.Information">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:Ed.Eto.DiagnosticSeverity.Hint">
+            <summary>
+            Hint
+            </summary>
+        </member>
+        <member name="T:Ed.Eto.ErrMsgClickedEventArgs">
+            <summary>
+            Info about error message that was clicked
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.ErrMsgClickedEventArgs.Info">
+            <summary>
+            Info about the error message that was clicked
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.ErrMsgClickedEventArgs.#ctor(System.ValueTuple{System.Int32,System.String})">
+            <summary>
+            The only constructor
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="T:Ed.Eto.FindAndReplaceForm">
+            <summary>
+            The reference Find and Replace form for the code editor control
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.FindAndReplaceForm.#ctor(Ed.Eto.Ed)">
+            <summary>
+            the constructor 
+            </summary>
+            <param name="ed"></param>
+        </member>
+        <member name="T:Ed.Eto.IEd">
+            <summary>
+             A facade API for the most common use case of the code editor
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.ReadOnly">
+            <summary>
+            When ReadOnly is set to true the content of the editor cannot be edited interactively 
+            but can still be set programatically
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.AutoCompleteIsEnabledWhenSignatureHelpWindowIsOpen">
+            <summary>
+            defaults to true
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.WordBasedAutoCompleteIsEnabled">
+            <summary>
+            defaults to true
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.WhitespaceVisible">
+            <summary>
+            When whitespace is visible space characters are dots '.' and tabs are arrows '->'.
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetIndentationGuidesVisibleAsync">
+            <summary>
+            Usually defined at the language level but this overrides it.
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.SetIndentationGuidesVisibleAsync(System.Boolean)">
+            <summary>
+            set visibility of indentation guides (usually set at the language level)
+            </summary>
+            <param name="visible"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Ed.Eto.IEd.InsertSpaces">
+            <summary>
+            Insert spaces instead of tabs
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.TabSize">
+            <summary>
+            Tab size
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.LineNumbersEnabled">
+            <summary>
+            Line numbers are enabled / visible
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.SetIndentationSettingsBasedOnContentAsync">
+            <summary>
+            doesn't quite work yet when it comes to setting the tabSize. Needs investigation.
+            </summary>
+            <returns>current insertSpaces and tabSize settings after the method is called</returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.NormalizeIndentationAsync">
+            <summary>
+            Fix indentation inconsistencies - not tested
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.FontFamily">
+            <summary>
+            Font Family
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.FontSize">
+            <summary>
+            Font size
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.FileName">
+            <summary>
+            File Name
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetCurrentPositionAsync">
+            <summary>
+            Current cursor position.
+            note: character means column 
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetWordAtCurrentPositionAsync">
+            <summary>
+            Word at current cursor position
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetSelectedTextAsync">
+            <summary>
+            Selected Text
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetLineTextAsync(System.Int32)">
+            <summary>
+            Text at line
+            </summary>
+            <param name="lineNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetTextAsync">
+            <summary>
+            Gets the text in the editor
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.SetTextAsync(System.String)">
+            <summary>
+            Sets the text in the editor
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.InsertTextAtCursorPositionAsync(System.String)">
+            <summary>
+            Insert text at current cursor position
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.InsertTextAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Insert text at a position
+            </summary>
+            <param name="text"></param>
+            <param name="lineNumber"></param>
+            <param name="character"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.RemoveTextAsync(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Remove text in range
+            </summary>
+            <param name="fromLineNumber"></param>
+            <param name="fromCharacter"></param>
+            <param name="toLineNumber"></param>
+            <param name="toCharacter"></param>
+            <returns>Removed text</returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.ReplaceTextAsync(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Replace text in range
+            </summary>
+            <param name="text"></param>
+            <param name="fromLineNumber"></param>
+            <param name="fromCharacter"></param>
+            <param name="toLineNumber"></param>
+            <param name="toCharacter"></param>
+            <returns>Replaced text</returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.ReplaceSelectedTextAsync(System.String)">
+            <summary>
+            Replace selected text
+            </summary>
+            <param name="text"></param>
+            <returns>Selected (replaced) text</returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.FoldAllMarkerRegionsAsync">
+            <summary>
+            Fold all marker regions
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.FoldLevel1Async">
+            <summary>
+            Fold level 1
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.UnfoldAllMarkerRegionsAsync">
+            <summary>
+            Unfold all marke regions
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.UnfoldAllAsync">
+            <summary>
+            Unfold all
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.Theme">
+            <summary>
+            For built-in themes. If custom themes are registered then 
+            use ed.Window.GetActiveColorTheme() and ed.Window.SetActiveColorTheme(string themeName)
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetLanguageIdsAsync">
+            <summary>
+            Ids of supported languages
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.LanguageId">
+            <summary>
+            ex: 'csharp', 'python', 'vb'
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.VerticalScrollbarEnabled">
+            <summary>
+            Enables or disables vertical scrollbar
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.VerticalScrollbarWidth">
+            <summary>
+            Default is 10
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.HorizontalScrollbarEnabled">
+            <summary>
+            Enables or disables horizontal scrollbar
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.HorizontalScrollbarWidth">
+            <summary>
+            Default is 10
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.MinimapEnabled">
+            <summary>
+            Enables or disables the minimap
+            </summary>
+        </member>
+        <member name="P:Ed.Eto.IEd.BreakpointSupportEnabled">
+            <summary>
+            Enable support for breakpoints
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.SetAndRevealCursorPositionAsync(System.Int32,System.Int32)">
+            <summary>
+            Sets the cursor position and reveal the line in the center of the viewport if it is not in view.
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="character"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetCodeCompletionWindowIsVisibleAsync">
+            <summary>
+            Checks whether the code completion window is currently visible / open
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.AddDiagnosticsAsync(System.Collections.Generic.IList{System.ValueTuple{System.String,Ed.Eto.DiagnosticSeverity,System.Int32,System.Int32,System.Int32,System.Int32}},System.Boolean)">
+            <summary>
+            Text decorations, i.e. squiggly lines, etc, representing errors, warnings, hints, or information
+            </summary>
+            <param name="diagnostics"></param>
+            <param name="ignoreIfCodeCompletionWindowIsVisible"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.ClearDiagnosticsAsync">
+            <summary>
+            Clear/remove all diagnostics
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.FindMatchesAsync(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Search for text in the model
+            </summary>
+            <param name="searchString"></param>
+            <param name="isRegex"></param>
+            <param name="matchCase"></param>
+            <param name="directionBackwards"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.GotoFindMatchStartingAtPositionAsync(System.Int32,System.Int32)">
+            <summary>
+            find match at position
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="character"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.FindNextMatchAsync(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Find next match
+            </summary>
+            <param name="searchString"></param>
+            <param name="isRegex"></param>
+            <param name="matchCase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.FindPreviousMatchAsync(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Find previous match
+            </summary>
+            <param name="searchString"></param>
+            <param name="isRegex"></param>
+            <param name="matchCase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.ReplaceFindMatchesAsync(System.String)">
+            <summary>
+            Replace matches with replacementString
+            </summary>
+            <param name="replacementString"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.ReplaceFindMatchAsync(System.String)">
+            <summary>
+            Replace match with replacementString
+            </summary>
+            <param name="replacementString"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.ClearFindMatchesAsync">
+            <summary>
+            Clear found matches
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.ToggleBreakpointAsync">
+            <summary>
+            Toggle breakpoint at line where cursor is
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.ToggleBreakpointAsync(System.Int32)">
+            <summary>
+            Toggle breakpoint at specified line number
+            </summary>
+            <param name="lineNumber"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.SetBreakpointAsync(System.Int32)">
+            <summary>
+            Add breakpoint at specified line number
+            </summary>
+            <param name="lineNumber"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.ClearBreakpointAsync(System.Int32)">
+            <summary>
+            Remove breakpoint at specified line number
+            </summary>
+            <param name="lineNumber"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.SetDisabledBreakpointAsync(System.Int32)">
+            <summary>
+            Set a disabled breakpoint at specified line number
+            </summary>
+            <param name="lineNumber"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetBreakpointLineNumbersAsync">
+            <summary>
+            Get line numbers that have breakpoints
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetBreakpointsAsync">
+            <summary>
+            Get breakpoints and their enabled state
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.ClearAllBreakpointsAsync">
+            <summary>
+            Remove all breakpoints
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.BreakOnLineAsync(System.Int32)">
+            <summary>
+            Add debugger stopped marker on specified line number.
+            </summary>
+            <param name="lineNumber"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.BreakOnLineWithExceptionAsync(System.Int32,System.String,System.String)">
+            <summary>
+            Add debugger stopped marker and exception message on specified line number.
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="exceptionMessage"></param>
+            <param name="exceptionDescription"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.BreakOnLineWithExceptionAsync(System.Int32,System.String,System.Int32)">
+            <summary>
+            Add debugger stopped marker and exception message on specified line number.
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="message"></param>
+            <param name="messageMaxDisplayLength">capped to 50 chars</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.BreakOnLineWithExceptionAsync(System.Int32,System.String)">
+            <summary>
+            Add debugger stopped marker and exception message on specified line number.
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.CancelBreakOnLineAsync(System.Int32)">
+            <summary>
+            Remove debugger stopped marker from specified line number.
+            </summary>
+            <param name="lineNumber"></param>
+        </member>
+        <member name="M:Ed.Eto.IEd.CancelBreakOnLineAsync">
+            <summary>
+            Remove debugger stopped marker.
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IEd.ErrorOnLineAsync(System.Int32,System.String,System.Int32)">
+            <summary>
+            Error message on line
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="message"></param>
+            <param name="messageMaxDisplayLength">capped to 50 chars</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.CancelErrorOnLineAsync(System.Int32)">
+            <summary>
+            Cancel error on line
+            </summary>
+            <param name="lineNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.CancelErrorOnAllLinesAsync">
+            <summary>
+            Cancel error on all lines
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.GetSupportedActionsAsync">
+            <summary>
+            A list of supported actions.
+            Pass it's id to TriggerActionAsync to run it.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IEd.TriggerActionAsync(System.String)">
+            <summary>
+            Run an action.
+            Call GetSupportedActionsAsync to get a list
+            </summary>
+            <param name="actionId"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Ed.Eto.IEd.ContentChanged">
+            <summary>
+            Document text content change event
+            </summary>
+        </member>
+        <member name="E:Ed.Eto.IEd.ErrMsgClicked">
+            <summary>
+            Error message (at the end of the line) clicked event
+            </summary>
+        </member>
+        <member name="E:Ed.Eto.IEd.ContextMenu">
+            <summary>
+            Context menu activated
+            </summary>
+        </member>
+        <member name="E:Ed.Eto.IEd.BreakpointsChanged">
+            <summary>
+            Breakpoints changed
+            </summary>
+        </member>
+        <member name="T:Ed.Eto.IReadOnlySupport">
+            <summary>
+            Read only sections support is experimental
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.GetLinesPartitionedByReadOnlyPropertyAsync">
+            <summary>
+            Gets the lines grouped by their read only state
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.SetLinesPartitionedByReadOnlyPropertyAsync(System.Collections.Generic.IList{System.ValueTuple{System.Boolean,System.Collections.Generic.IList{System.String}}})">
+            <summary>
+            Sets the lines grouped by their read only state
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.GetLinesAsync">
+            <summary>
+            Gets individual lines with their read only state
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.SetLinesAsync(System.Collections.Generic.IList{System.ValueTuple{System.Boolean,System.String}})">
+            <summary>
+            Sets individual lines with their read only state
+            </summary>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.GetTextAsync(System.String)">
+            <summary>
+            Return all content as one string. Read-only lines are prefixed with prefixToAddToReadOnlyLines
+            </summary>
+            <param name="prefixToAddToReadOnlyLines"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.SetTextAsync(System.String,System.String)">
+            <summary>
+            Content passed as one string where each read only line is already formatted with a read only prefix.
+            </summary>
+            <param name="text"></param>
+            <param name="prefixToAddToReadOnlyLines"></param>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.GetTextAndReadOnlyLineNumbersAsync">
+            <summary>
+            Another way to get content where some of the lines are read only.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ed.Eto.IReadOnlySupport.SetTextAndReadOnlyLineNumbersAsync(System.String,System.Collections.Generic.IList{System.Int32})">
+            <summary>
+            Another way to set the content and indicate which lines are read only.
+            </summary>
+            <param name="text"></param>
+            <param name="readOnlyLineNumbers"></param>
+        </member>
+    </members>
+</doc>

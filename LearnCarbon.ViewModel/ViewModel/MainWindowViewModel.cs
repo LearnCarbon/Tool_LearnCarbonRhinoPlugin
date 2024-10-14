@@ -1,28 +1,27 @@
-﻿using Grasshopper.Kernel;
-using LearnCarbon.Helper.Helper;
+﻿using LearnCarbon.Helper.Helper;
 using Rhino;
-using Rhino.Commands;
 using Rhino.DocObjects;
 using Rhino.Input;
 using Rhino.Input.Custom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rhino.Geometry;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
 
 namespace LearnCarbon.ViewModel.ViewModel
 {
     public class MainWindowViewModel : BaseModel
     {
         RhinoDoc doc;
-        GH_Document GrasshopperDocument;
         double height;
         List<ObjRef> selectedObjects;
+
+        // Temp to setup
+        private readonly string pythonScriptPath;
+        private readonly string resultFilePath;
+        private readonly string inputFilePath;
 
         #region Properties
 
@@ -228,6 +227,25 @@ namespace LearnCarbon.ViewModel.ViewModel
             CalculateCommand = new RelayCommand(Calculate, null);
             SelectCommand = new RelayCommand(SelectModelObj, null);
             RhinoDoc.ReplaceRhinoObject += Doc_ReplaceRhinoObject;
+
+            string ProjectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            // Move up to the main repository folder
+            string repoDirectory = Path.GetFullPath(Path.Combine(ProjectDirectory, @"..\..\..\.."));
+            // Navigate to the 'src' folder and then to 'run_ml.py'
+            pythonScriptPath = Path.Combine(repoDirectory, "src", "run_ml.py");
+            resultFilePath = Path.Combine(repoDirectory, "src", "log", "prediction_result.txt");
+            inputFilePath = Path.Combine(repoDirectory, "src", "log", "input.txt");
+
+
+            if (File.Exists(pythonScriptPath))
+            {
+                Console.WriteLine("Python script found at: " + pythonScriptPath);
+            }
+            else
+            {
+                Console.WriteLine("Python script not found.");
+            }
+            double debug = 0;
         }
         #endregion
 
@@ -257,159 +275,82 @@ namespace LearnCarbon.ViewModel.ViewModel
             }
 
             SetHeight(boxList);
-            //var bb = boxList[0];
-            //for (int j = 1; j < boxList.Count; j++)
-            //{
-            //    bb = BoundingBox.Union(bb, boxList[j]);
-            //}
-            //height = bb.Max.Z - bb.Min.Z;
-            //NoOfFloor = (int)Math.Ceiling(height / TypicalHeight);
         }
         private void Calculate()
         {
             try
             {
-                string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var path = Path.Combine(assemblyFolder, "LearnCarbon.gh");
+                // TO DO run this for every selected object and create a parallel list with Co2
+                RunPythonScript(optionA == true);
+                //RunPythonScriptDEBUG();
 
-                if (!(File.Exists(path)))
-                    throw new Exception($"File not found in " + path);
-
-                var io = new GH_DocumentIO();
-                io.Open(path);
-
-                GrasshopperDocument = io.Document;
-
-                var activeObjects = GrasshopperDocument.ActiveObjects();
-                Output = string.Empty;
-                foreach (var obj in activeObjects)
-                {
-                    if (obj is Grasshopper.Kernel.Special.GH_Panel)
-                    {
-                        var panel = obj as Grasshopper.Kernel.Special.GH_Panel;
-                        if (panel.NickName == "FP")
-                        {
-                            panel.SetUserText(Footprint.ToString());
-                        }
-                        else if (panel.NickName == "NF")
-                        {
-                            panel.SetUserText(NoOfFloor.ToString());
-
-                        }
-                        else if (panel.NickName == "LO")
-                        {
-                            if (Location == "Africa")
-                                panel.SetUserText("0");
-                            else if (Location == "Asia-Pacific")
-                                panel.SetUserText("1");
-                            else if (Location == "Europe")
-                                panel.SetUserText("2");
-                            else if (Location == "Middle East")
-                                panel.SetUserText("3");
-                            else if (Location == "North America")
-                                panel.SetUserText("4");
-                            else
-                                panel.SetUserText("5");
-                        }
-                        else if (panel.NickName == "BT")
-                        {
-                            if (IsCommercial)
-                                panel.SetUserText("0");
-                            else
-                                panel.SetUserText("1");
-                        }
-                        else if (panel.NickName == "TA")
-                        {
-                            panel.SetUserText(TotalArea.ToString());
-
-                        }
-                        else if (panel.NickName == "OA")
-                        {
-                            panel.SetUserText(OptionA.ToString());
-
-                        }
-                        else if (panel.NickName == "OB")
-                        {
-                            panel.SetUserText(OptionB.ToString());
-
-                        }
-                        else if (panel.NickName == "TS")
-                        {
-                            if (IsTimber)
-                                panel.SetUserText("2");
-                            else if (IsConcreteTimber)
-                                panel.SetUserText("3");
-                            else if (IsConcrete)
-                                panel.SetUserText("0");
-                            else /*if (IsSteelConcrete)*/
-                                panel.SetUserText("1");
-                            //else
-                            //    panel.SetUserText("Steel");
-                        }
-                        else if (panel.NickName == "TC")
-                        {
-                            panel.SetUserText(TargetCo2.ToString());
-                        }
-                        else if (panel.NickName == "OT")
-                        {
-                            panel.ExpireSolution(true);
-                            panel.CollectData();
-                            foreach (var data in panel.VolatileData.AllData(true))
-                                Output += data.ToString();
-
-                            if (OptionA)
-                            {
-                                IsConWoodHyb = false;
-                                IsWood = false;
-                                IsSteConHyb = false;
-                                IsRc = false;
-                                Output += " tCo2e";
-                            }
-                            else if (OptionB)
-                            {
-                                if (string.Equals(Output, "Wood-Hybrid"))
-                                {
-                                    IsConWoodHyb = true;
-                                    IsWood = false;
-                                    IsSteConHyb = false;
-                                    IsRc = false;
-                                }
-                                else if (string.Equals(Output, "Wood"))
-                                {
-                                    IsConWoodHyb = false;
-                                    IsWood = true;
-                                    IsSteConHyb = false;
-                                    IsRc = false;
-                                }
-                                else if (string.Equals(Output, "Steel-Concrete"))
-                                {
-                                    IsConWoodHyb = false;
-                                    IsWood = false;
-                                    IsSteConHyb = true;
-                                    IsRc = false;
-                                }
-                                else if(string.Equals(Output, "Concrete"))
-                                {
-                                    IsConWoodHyb = false;
-                                    IsWood = false;
-                                    IsSteConHyb = false;
-                                    IsRc = true;
-                                }
-                                else
-                                {
-                                    IsConWoodHyb = false;
-                                    IsWood = false;
-                                    IsSteConHyb = false;
-                                    IsRc = false;
-                                }
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception e)
             {
                 Output = e.Message;
+            }
+        }
+
+        public void RunPythonScript(bool optionA)
+        {
+            try
+            {
+                // Write inputs to the input file
+                using (StreamWriter sw = new StreamWriter(inputFilePath))
+                {
+                    int buildingType = IsResidential ? 1 : 0;
+
+                    int location = 0;
+                    switch (Location)
+                    {
+                        case "Asia-Pacific":
+                            location = 1;
+                            break;
+                        case "Europe":
+                            location = 2;
+                            break;
+                        case "Middle East":
+                            location = 3;
+                            break;
+                        case "North America":
+                            location = 4;
+                            break;
+                        default:
+                            location = 5;
+                            break;
+                    }
+
+                    if (optionA)
+                    {
+                        int constructionType = 0;
+                        if (IsSteelConcrete) constructionType = 1;
+                        else if (IsTimber) constructionType = 2;
+                        else if (IsConcreteTimber) constructionType = 3;
+
+                        // Write modelA inputs to file
+                        sw.WriteLine($"{optionA},{constructionType},{buildingType},{location},{TotalArea},{noOfFloor}");
+                    }
+                    else
+                    {
+                        // Write modelB input to file
+                        sw.WriteLine($"{optionA},{targetCo2},{buildingType},{location},{TotalArea},{noOfFloor}");
+                    }
+                }
+
+                string rhinoScriptCommand = $"-_ScriptEditor _Run \"{pythonScriptPath}\"";
+                bool debug = RhinoApp.RunScript(rhinoScriptCommand, false);
+
+                // Read the result from the result file
+                string prediction = System.IO.File.ReadAllText(resultFilePath);
+
+                if(optionA)
+                    Output = $"{prediction} tCo2e";
+                else
+                    Output = prediction;
+            }
+            catch (Exception ex)
+            {
+                RhinoApp.WriteLine($"Error: {ex.Message}");
             }
         }
         #endregion

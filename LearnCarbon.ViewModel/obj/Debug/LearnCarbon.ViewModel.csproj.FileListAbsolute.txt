@@ -19,3 +19,12 @@ F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\
 F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.csproj.CoreCompileInputs.cache
 F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.dll
 F:\35_AEC_Hackathon\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.pdb
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\bin\Debug\LearnCarbon.ViewModel.dll
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\bin\Debug\LearnCarbon.ViewModel.pdb
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.csproj.AssemblyReference.cache
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.csproj.CoreCompileInputs.cache
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.dll
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCarbon.ViewModel.pdb
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\bin\Debug\Ed.Eto.dll
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\bin\Debug\Ed.Eto.xml
+C:\Reope\GitHub\Tool_LearnCarbonRhinoPlugin\LearnCarbon.ViewModel\obj\Debug\LearnCar.39283C0E.Up2Date
